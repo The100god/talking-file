@@ -31,18 +31,19 @@ export default function Home() {
     setFileName(file.name);
     setStartPage(1);
     try {
+      let parsed = [];
       if (file.type === "application/pdf") {
         const { parsePdf } = await import("@/utils/parsePdf");
-        const parsed = await parsePdf(file);
-        setPages(parsed);
+        parsed = await parsePdf(file);
       } else if (file.type.includes("image")) {
         const { ocrImage } = await import("@/utils/ocrImage");
-        const parsed = await ocrImage(file);
-        setPages(parsed);
+        parsed = await ocrImage(file);
       } else {
-        const parsed = await parseDocx(file);
-        setPages(parsed);
+        parsed = await parseDocx(file);
       }
+      setPages(parsed);
+      localStorage.setItem("offline_pages", JSON.stringify(parsed));
+      localStorage.setItem("offline_filename", file.name);
     } finally {
       setLoading(false);
     }
@@ -50,6 +51,16 @@ export default function Home() {
 
   useEffect(() => {
     speechSynthesis.getVoices();
+    const cachedPages = localStorage.getItem("offline_pages");
+    const cachedName = localStorage.getItem("offline_filename");
+
+    if (cachedPages) {
+      setPages(JSON.parse(cachedPages));
+    }
+
+    if (cachedName) {
+      setFileName(cachedName);
+    }
   }, []);
 
   useEffect(() => {
