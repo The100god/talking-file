@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="hydrated">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen text-white overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen overflow-x-hidden`}
       >
         <div className="fixed inset-0 -z-10">
           <BackgroundPattern />
