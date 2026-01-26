@@ -5,7 +5,8 @@ import styled from "styled-components";
 export default function BackgroundPattern() {
   return (
     <StyledWrapper>
-      <svg className="texture-filter">
+      <svg width={0} height={0} className="texture-filter">
+        <defs>
         <filter id="ocean-texture">
           <feTurbulence
             result="noise"
@@ -31,6 +32,7 @@ export default function BackgroundPattern() {
           />
           <feBlend mode="screen" in2="litNoise" in="SourceGraphic" />
         </filter>
+        </defs>
       </svg>
 
       <div className="ocean-depths-pattern" />
@@ -39,21 +41,23 @@ export default function BackgroundPattern() {
 }
 
 const StyledWrapper = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  pointer-events: none;
-  overflow: hidden;       /* 🔥 IMPORTANT */
-  contain: layout paint;  /* 🔥 IMPORTANT */
+  // position: fixed;
+  // inset: 0;
+  // z-index: -10;
+  // pointer-events: none;
+  // overflow: hidden;       /* 🔥 IMPORTANT */
+  // contain: layout paint;  /* 🔥 IMPORTANT */
 
-  .texture-filter {
-    width: 0;
-    height: 0;
-  }
+  // .texture-filter {
+  //   width: 0;
+  //   height: 0;
+  // }
+  position: absolute;
+  inset: 0;
 
   .ocean-depths-pattern {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(
       180deg,
       #0a1e2b,

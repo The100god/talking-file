@@ -31,11 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="hydrated">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-white overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen text-white overflow-x-hidden`}
       >
-        <BackgroundPattern />
-        <OfflineBanner/>
-        {children}
+        <div className="fixed inset-0 -z-10">
+          <BackgroundPattern />
+        </div>
+        <div className="relative z-10">
+          <OfflineBanner />
+          {children}
+        </div>
       </body>
     </html>
   );
