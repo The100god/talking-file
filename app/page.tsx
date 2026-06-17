@@ -1,7 +1,8 @@
 "use client";
 
 import FileUpload from "@/components/FileUpload";
-import ParsedText from "@/components/ParsedText";
+import dynamic from "next/dynamic";
+const ParsedText = dynamic(() => import("@/components/ParsedText"), { ssr: false });
 import { parseDocx } from "@/utils/parseDocx";
 import { useAtom } from "jotai";
 import {
@@ -16,6 +17,7 @@ import { useEffect } from "react";
 import ReaderHeader from "@/components/ReaderHeader";
 import Loader from "@/components/UiComponent/Loader";
 import LoaderModal from "@/components/LoaderModal";
+import WordTracker from "@/components/WordTracker";
 
 export default function Home() {
   const [, setPages] = useAtom(pagesAtom);
@@ -111,7 +113,10 @@ export default function Home() {
         )} */}
 
           {!loading && visiblePages.length > 0 && (
-            <ParsedText pages={visiblePages} />
+            <>
+              <WordTracker pages={visiblePages} />
+              <ParsedText pages={visiblePages} />
+            </>
           )}
         </div>
       </main>
