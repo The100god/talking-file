@@ -274,14 +274,7 @@ export function resumeSpeech(pages: { page: number; text: string }[]) {
   speechSynthesis.cancel();
 
   const remainingText = text.slice(wordIndex);
-  if (isMobile()) {
-    speechSynthesis.cancel();
-    speakPages(
-      [{ page, text: pageObj.text.slice(wordIndex) }],
-      true
-    );
-    return;
-  }
+
 
   speakPages([{ page, text: remainingText }], true);
 }

@@ -3,6 +3,10 @@
 import FileUpload from "@/components/FileUpload";
 import dynamic from "next/dynamic";
 const ParsedText = dynamic(() => import("@/components/ParsedText"), { ssr: false });
+const ReaderHeader = dynamic(() => import("@/components/ReaderHeader"), { ssr: false, loading: () => <>Loading...</> });
+const WordTracker = dynamic(() => import("@/components/WordTracker"), { ssr: false, loading: () => <>Loading...</> });
+const Loader = dynamic(() => import("@/components/UiComponent/Loader"), { ssr: false, loading: () => <>Loading...</> });
+const LoaderModal = dynamic(() => import("@/components/LoaderModal"), { ssr: false, loading: () => <>Loading...</> });
 import { parseDocx } from "@/utils/parseDocx";
 import { useAtom } from "jotai";
 import {
@@ -14,10 +18,6 @@ import {
   loadingAtom,
 } from "@/store/readerAtoms";
 import { useEffect } from "react";
-import ReaderHeader from "@/components/ReaderHeader";
-import Loader from "@/components/UiComponent/Loader";
-import LoaderModal from "@/components/LoaderModal";
-import WordTracker from "@/components/WordTracker";
 
 export default function Home() {
   const [, setPages] = useAtom(pagesAtom);
